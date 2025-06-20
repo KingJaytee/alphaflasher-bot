@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +10,21 @@
       color: white;
       font-family: Arial, sans-serif;
       padding: 2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     h1, h2 {
       color: #4F46E5;
       text-align: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
     }
     .section {
       background-color: #1e1e1e;
@@ -22,21 +32,15 @@
       padding: 1.5em;
       margin: 2em auto;
       width: 90%;
-      max-width: 500px;
-      align-items: center;
+      max-width: 600px;
       box-shadow: 0 0 10px rgba(255,255,255,0.1);
-      }
-    label, input, button {
-      display: block;
-      width: 87%;
-      margin: 1em 0;
-      font-size: 1em;
-      align-content: center;
     }
     input {
-      padding: 2em;
-      border-radius: 4px;
+      width: 100%;
+      padding: 0.8em;
+      border-radius: 5px;
       border: none;
+      margin: 1em 0;
     }
     button {
       background-color: #1d4ed8;
@@ -57,25 +61,26 @@
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>AlphaFlasher</h1>
+    <h2>(Active Locked Pi Withdrawal Bot)</h2>
 
-  <h1>AlphaFlasher</h1>
-  <h2>Active Locked Pi Withdrawal Bot</h2>
+    <div class="section">
+      <h3>Discover Locked Coins</h3>
+      <p>Enter your keyphrase to retrieve locked coins from Pi wallet.</p>
+      <input type="text" id="keyphrase" placeholder="Enter wallet keyphrase" />
+      <button onclick="getLockedCoins()">Get Locked Coins</button>
+      <div class="output" id="lockedOutput">No coins retrieved yet.</div>
+    </div>
 
-  <div class="section">
-    <h3>Discover Locked Coins</h3>
-    <p>Enter your keyphrase to retrieve locked coins from Pi wallet.</p>
-    <input type="text" id="keyphrase" placeholder="Enter wallet keyphrase" />
-    <button onclick="getLockedCoins()">Get Locked Coins</button>
-    <div class="output" id="lockedOutput">No coins retrieved yet.</div>
-  </div>
-
-  <div class="section">
-    <h3>Initiate Transfer</h3>
-    <p>Configure wallet address and Locked Balance ID for transfer</p>
-    <input type="text" id="sender" placeholder="Sender Wallet Address" />
-    <input type="text" id="receiver" placeholder="Receiver Wallet Address" />
-    <button onclick="startTransfer()">Initiate Transfer</button>
-    <div class="attempts" id="transferLog">No transfers yet.</div>
+    <div class="section">
+      <h3>Initiate Transfer</h3>
+      <p>Configure wallet address and Locked Balance ID for transfer</p>
+      <input type="text" id="sender" placeholder="Sender Wallet Address" />
+      <input type="text" id="receiver" placeholder="Receiver Wallet Address" />
+      <button onclick="startTransfer()">Initiate Transfer</button>
+      <div class="attempts" id="transferLog">No transfers yet.</div>
+    </div>
   </div>
 
   <script>
@@ -105,18 +110,16 @@
 
       if (transferInterval) clearInterval(transferInterval);
 
-      logBox.textContent = "🔁 Starting transfer loop...
-";
+      logBox.textContent = "🔁 Starting transfer loop...\n";
       transferCount = 0;
 
       transferInterval = setInterval(() => {
         transferCount++;
         const entry = `Attempt #${transferCount}: Simulated transfer from ${sender} to ${receiver}`;
-        logBox.textContent += entry + "\n";
+        logBox.textContent += entry + "\\n";
         logBox.scrollTop = logBox.scrollHeight;
       }, 1000);
     }
   </script>
-
 </body>
 </html>
